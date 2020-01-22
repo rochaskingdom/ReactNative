@@ -12,40 +12,27 @@ import {
   Text,
   Image,
   Dimensions,
-  FlatList,
   StyleSheet,
 } from 'react-native';
 
 const width = Dimensions.get('screen').width;
 
-export default class App extends Component {
+export default class Post extends Component {
   render() {
 
-    const fotos = [
-      {id: 1, usuario: 'vinicius'},
-      {id: 2, usuario: 'leticia'},
-      {id: 3, usuario: 'joao'}
-    ];
-
   return (
-    <FlatList
-      keyExtractor={item => item.id.toString()}
-      data={fotos}
-      renderItem={ ({item}) => 
         <View>			
 			<View style={styles.cabecalho}>
-				<Image source={require('./resources/img/catalina.jpg')} 
+				<Image source={require('../../resources/img/catalina.jpg')} 
 					style={styles.fotoDePerfil}/>
-            <Text>{item.usuario}</Text>
+            <Text>{this.props.foto.usuario}</Text>
 			</View>
 
-            <Image source={require('./resources/img/catalina.jpg')} 
+            <Image source={require('../../resources/img/catalina.jpg')} 
             	style={styles.foto}/>
         </View>
-      }
-    />
-  );
- }
+    	);
+	}
  }
 
  const styles = StyleSheet.create({
