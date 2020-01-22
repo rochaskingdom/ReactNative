@@ -13,22 +13,31 @@ import {
 import Post from './components/Post';
 
 export default class App extends Component {
-  render() {
 
-    const fotos = [
-      {id: 1, usuario: 'vinicius'},
-      {id: 2, usuario: 'leticia'},
-      {id: 3, usuario: 'joao'}
-    ];
+	constructor() {
+		super();
+		this.state = {
+			fotos: []
+		}
+	}
 
-  return (
-    <FlatList
-      keyExtractor={item => item.id.toString()}
-      data={fotos}
-      renderItem={ ({item}) => 
-        <Post foto={item}/>
-      }
-    />
-  );
+	componentDidMount() {
+
+		fetch('https://instalura-api.herokuapp.com/api/public/fotos/rafael')
+			.then(resposta => resposta.json())
+			.then(json => this.setState({fotos: json}))
+	}
+
+  	render() {
+
+	return (
+		<FlatList
+		keyExtractor={item => item.id.toString()}
+		data={this.state.fotos}
+		renderItem={ ({item}) => 
+			<Post foto={item}/>
+		}
+		/>
+	);
  }
  }
